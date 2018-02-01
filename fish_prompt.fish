@@ -40,7 +40,7 @@ __pure_set_default pure_user_host_location 0
 # Max execution time of a process before its run time is shown when it exits
 __pure_set_default pure_command_max_exec_time 5
 
-function pre_prompt --on-event fish_prompt
+function pre_prompt
   # Template
   set -l user_and_host ""
   set -l current_folder (__parse_current_folder)
@@ -132,6 +132,7 @@ function pre_prompt --on-event fish_prompt
 end
 
 function fish_prompt
+  pre_prompt
   set -l prompt ""
 
   # Save previous exit code
