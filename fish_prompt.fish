@@ -132,11 +132,13 @@ function pre_prompt
 end
 
 function fish_prompt
-  pre_prompt
   set -l prompt ""
 
   # Save previous exit code
   set -l exit_code $status
+
+  # Must be after saving status code
+  pre_prompt
 
   # Set default color symbol to green meaning it's all good!
   set -l color_symbol $pure_color_green
