@@ -1,5 +1,6 @@
 function _pure_format_time -d "Format milliseconds to a human readable format"
     set --local milliseconds $argv[1]
+    set --local millis (math -s0 "$milliseconds % 1000")
     set --local seconds (math -s0 "$milliseconds / 1000 % 60")
     set --local minutes (math -s0 "$milliseconds / 60000 % 60")
     set --local hours (math -s0 "$milliseconds / 3600000 % 24")
@@ -19,8 +20,12 @@ function _pure_format_time -d "Format milliseconds to a human readable format"
         set time $time (printf "%sm" $minutes)
     end
 
-    if test $seconds -gt $threshold
+    if test $seconds -gt 0
         set time $time (printf "%ss" $seconds)
+    end
+
+    if test $millis -gt 0
+        set time $time (printf "%sms" $millis)
     end
 
     echo -e (string join ' ' $time)
